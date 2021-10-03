@@ -1,13 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// no-use-before-define
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { ActionTree, MutationTree } from 'vuex'
+
 export const state = () => ({
   res: null,
   form: {},
   err: []
 })
-export type RootState = ReturnType<typeof state>
-export const mutations:MutationTree<RootState> = {
+
+export type PostState = ReturnType<typeof state>
+
+export const mutations: MutationTree<PostState> = {
   SET_DATA (state, res) {
     state.res = res
   },
@@ -15,9 +16,9 @@ export const mutations:MutationTree<RootState> = {
     state.err = err
   }
 }
-export const actions : ActionTree<RootState, RootState> = {
-  create_post ({ commit }, post) {
-    this.$repositories.post.create(post)
+export const actions: ActionTree<PostState, any> = {
+  create_post ({ commit }) {
+    this.$repositories.users().all()
       .then(res => commit('SET_DATA', res.data)).catch(e => commit('SET_ERR', e))
   }
 }

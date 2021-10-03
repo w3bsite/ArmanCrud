@@ -9,10 +9,11 @@ module.exports = {
     'plugin:nuxt/recommended',
     'prettier'
   ],
-  plugins: [
-  ],
+  plugins: [],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'import/no-mutable-exports': 'off'
+  },
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx']
