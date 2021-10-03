@@ -13,44 +13,35 @@
         Submit
       </button>
     </form>
-    <div v-if="res"  class="mx-auto card-body" >
+
+    <div v-if="res" class="mx-auto card-body">
       <h4>server response</h4>
-    {{ res }}
+      {{ res }}
     </div>
   </div>
 </template>
 
-<script>
-import { mapActions, mapState } from 'vuex'
+<script lang="ts">
+import Vue from 'vue'
+import { mapState } from 'vuex'
 
-export default {
+export default Vue.extend({
+  data () {
+    return {}
+  },
   computed: {
-    ...mapState({
-      data: (state) => {
-        return state.post.data
-      },
-      form: (state) => {
-        return state.post.form
-      },
-      res: (state) => {
-        return state.post.res
-      }
-    })
+    ...mapState('post', ['form', 'res'])
   },
   methods: {
-    ...mapActions({
-      add: 'post/create_post'
-    }),
     send () {
-      this.add(this.post)
+      this.$store.dispatch('post/create_post')
     }
   }
-
-}
+})
 </script>
 
 <style>
-.card{
-  margin-top:100px ;
+.card {
+  margin-top: 100px;
 }
 </style>
